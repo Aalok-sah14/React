@@ -7,7 +7,7 @@ const page = () => {
         <div>
             
             
-                 <Card className='felx flex-row'>
+                <Card className='felx flex-row'>
                 <ThumbsUp className='text-blue-800' />
                 <ThumbsDown className='text-blue-800' />
                 <Angry className='text-red-600'/>

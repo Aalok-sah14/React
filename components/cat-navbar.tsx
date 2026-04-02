@@ -1,33 +1,29 @@
-"use client"; // This tells Next.js the menu is interactive
+import React from 'react'
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from './ui/navigation-menu'
+import { Search, ShoppingCart, User } from 'lucide-react'
+import { Input } from './ui/input'
+import axios from 'axios'
+import Categorieslist from './cat-list'
+import Catlist from './cat-list'
 
-import React from 'react';
-// We import from YOUR folders, not the general library
-import { 
-  NavigationMenu, 
-  NavigationMenuContent, 
-  NavigationMenuItem, 
-  NavigationMenuLink, 
-  NavigationMenuList, 
-  NavigationMenuTrigger 
-} from "@/components/ui/navigation-menu"; 
-import { Input } from "@/components/ui/input";
+const CatNavbar =async () => {
+  const { data } = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/categories/");
 
-const CatNavbar = () => {
   return (
-    <div className = 'w-[100vw] bg-black text-white'>
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <NavigationMenuLink href="/">Link</NavigationMenuLink>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-     
-    </NavigationMenu>
-    </div>
-  );
-};
 
-export default CatNavbar;
+
+
+
+    <header className="sticky top-16 z-50  w-full bg-pink-800">
+      <div className="container flex   gap-4  h-10">
+      {data?.splice(0,10).map((item)=>{
+    return(
+       <Catlist key={item.id} item={item}/>
+    )
+})}
+      </div>
+    </header>
+  )
+}
+
+export default CatNavbar
